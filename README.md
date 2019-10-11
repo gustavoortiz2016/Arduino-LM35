@@ -1,37 +1,44 @@
-## Welcome to GitHub Pages
+#Sensor LM35 Para Arduino
 
-You can use the [editor on GitHub](https://github.com/gustavoortiz2016/Arduino-LM35/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Esta es una librería escrita en C++ que puedes utilizar para realizar lecturas de temperatura utilizando un componente LM35.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Es una librería que fue creada para que su uso sea los mas fácil posible.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+Para utilizarlo primero debes de agregar la referencia de la libreria.
+```cpp
+#include <lm35.h>
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Luego debes declarar una variable y debes de pasar como parámetro el pin, en este caso es A0
 
-### Jekyll Themes
+```cpp
+lm35 LM35(0);
+```
+Luego solo debes de llamar el método toCelsius() y listo
+```cpp
+Serial.println(String(LM35.toCelsius())+"Grados Celsius\n");
+```
+Así queda el código completo
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/gustavoortiz2016/Arduino-LM35/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```cpp
+#include <lm35.h>
+//Se llama a la librería y se le pasa como variable el pin de entrada del sensor en este caso A0
+lm35 LM35(0);
+void setup() {
+// Configuramos el puerto serial a 9600 bps
+Serial.begin(9600);
+}
 
-### Support or Contact
+void loop() {
+//Se envia el dato
+Serial.println(String(LM35.toCelsius())+"Grados Celsius\n");
+// Esperamos un tiempo para repetir el loop
+delay(1000);
+}
+```
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+la conexión quedaría de la siguiente forma
+
+![lm35Cnx](img/lm35Cnx.png)
+
+
